@@ -140,35 +140,7 @@ public class PuppyPane extends GridPane {
         // }
         // }
 
-        // Step 3: Add the ImageView attributes to the gridpane
-        // add the white puppy view to the gridpane if the puppy color is white or
-        // White, if not remove it
-        if (puppy.getColor().equals("white") || puppy.getColor().equals("White")) {
-            this.add(whitePuppyView, 2, 0, 1, 10);
-        } else {
-            this.getChildren().remove(whitePuppyView);
-        }
-        // add the black puppy view to the gridpane if the puppy color is black or
-        // Black, if not remove it
-        if (puppy.getColor().equals("black") || puppy.getColor().equals("Black")) {
-            this.add(blackPuppyView, 2, 0, 1, 10);
-        } else {
-            this.getChildren().remove(blackPuppyView);
-        }
-        // add the brown puppy view to the gridpane if the puppy color is brown or
-        // Brown, if not remove it
-        if (puppy.getColor().equals("brown") || puppy.getColor().equals("Brown")) {
-            this.add(brownPuppyView, 2, 0, 1, 10);
-        } else {
-            this.getChildren().remove(brownPuppyView);
-        }
-        // add the red puppy view to the gridpane if the puppy color is red or Red, if
-        // not remove it
-        if (puppy.getColor().equals("red") || puppy.getColor().equals("Red")) {
-            this.add(redPuppyView, 2, 0, 1, 10);
-        } else {
-            this.getChildren().remove(redPuppyView);
-        }
+        changePuppyPicture(puppy);
 
         // change the image height of white puppy to 100
         whitePuppyView.setFitHeight(250);
@@ -189,6 +161,10 @@ public class PuppyPane extends GridPane {
 
         // add a listener to the puppy button to change the labels
         puppyButton.setOnAction(e -> {
+            // store the input from the text fields in a new puppy object
+        Puppy textPuppy = new Puppy(nameField.getText(), Integer.parseInt(ageField.getText()), breedField.getText(),
+        colorField.getText(), furtypeField.getText(), sizeField.getText(), 0, Boolean.parseBoolean(spotsField.getText()),
+        sexField.getText());
             // set the puppy name label to the name field text
             nameLabel.setText("Name: " + nameField.getText());
             // set the puppy age label to the age field text
@@ -207,6 +183,10 @@ public class PuppyPane extends GridPane {
             spotsLabel.setText("Spots: " + spotsField.getText());
             // set the puppy sex label to the sex field text
             sexLabel.setText("Sex: " + sexField.getText());
+            // call the change puppy picture method to change the puppy picture based on the text input
+            changePuppyPicture(textPuppy);
+            // print the puppy object to the console
+            System.out.println(textPuppy);
         });
 
         // add a listener to the new puppy button to change the labels to generate a new
@@ -232,10 +212,48 @@ public class PuppyPane extends GridPane {
             spotsLabel.setText("Spots: " + newPuppy.isSpots());
             // set the puppy sex label to the new puppy sex
             sexLabel.setText("Sex: " + newPuppy.getSex());
-            // call the addWhitePuppyView method to add the white puppy view to the gridpane
-            // addWhitePuppyView();
+            // call the changePuppyPicture method to change the puppy picture
+            changePuppyPicture(newPuppy);
         });
+    }
 
+    private void changePuppyPicture(Puppy puppy) {
+        // Step 3: Add the ImageView attributes to the gridpane
+        // add the white puppy view to the gridpane if the puppy color is white or
+        // White, if not remove it
+
+        this.getChildren().remove(whitePuppyView);
+        this.getChildren().remove(blackPuppyView);
+        this.getChildren().remove(brownPuppyView);
+        this.getChildren().remove(redPuppyView);
+        System.out.println(puppy.getColor());
+        if (puppy.getColor().equals("white") || puppy.getColor().equals("White")) {
+            this.add(whitePuppyView, 2, 0, 1, 10);
+        } // else {
+        //     this.getChildren().remove(whitePuppyView);
+        // }
+        // add the black puppy view to the gridpane if the puppy color is black or
+        // Black, if not remove it
+        if (puppy.getColor().equals("black") || puppy.getColor().equals("Black")) {
+            this.add(blackPuppyView, 2, 0, 1, 10);
+        } // else {
+        //     this.getChildren().remove(blackPuppyView);
+        // }
+        // add the brown puppy view to the gridpane if the puppy color is brown or
+        // Brown, if not remove it
+        if (puppy.getColor().equals("brown") || puppy.getColor().equals("Brown")) {
+            this.add(brownPuppyView, 2, 0, 1, 10);
+        } // else {
+        //     this.getChildren().remove(brownPuppyView);
+        // }
+        // add the red puppy view to the gridpane if the puppy color is red or Red, if
+        // not remove it
+        if (puppy.getColor().equals("red") || puppy.getColor().equals("Red")) {
+            this.add(redPuppyView, 2, 0, 1, 10);
+        } // else {
+        //     this.getChildren().remove(redPuppyView);
+        // }
+        
     }
 
 }
