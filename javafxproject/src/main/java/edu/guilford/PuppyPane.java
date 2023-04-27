@@ -140,6 +140,7 @@ public class PuppyPane extends GridPane {
         // }
         // }
 
+        // Step 3: Add the ImageView attributes to the gridpane
         // add the white puppy view to the gridpane if the puppy color is white or
         // White, if not remove it
         if (puppy.getColor().equals("white") || puppy.getColor().equals("White")) {
