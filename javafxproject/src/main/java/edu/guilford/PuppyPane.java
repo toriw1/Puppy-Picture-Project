@@ -2,12 +2,15 @@ package edu.guilford;
 
 import java.io.File;
 
-import javafx.geometry.HPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 public class PuppyPane extends GridPane {
 
@@ -20,8 +23,8 @@ public class PuppyPane extends GridPane {
     private TextField breedField;
     private TextField colorField;
     private TextField furtypeField;
-    private TextField sizeField;
-    // private TextField weightField;
+    // private TextField sizeField;
+    private TextField weightField;
     private TextField spotsField;
     private TextField sexField;
 
@@ -31,14 +34,19 @@ public class PuppyPane extends GridPane {
     private Label breedLabel;
     private Label colorLabel;
     private Label furtypeLabel;
-    private Label sizeLabel;
-    // private Label weightLabel;
+    // private Label sizeLabel;
+    private Label weightLabel;
     private Label spotsLabel;
     private Label sexLabel;
 
     // add puppy button attribute
     private Button puppyButton;
     private Button newPuppyButton;
+
+    // menu attributes
+    private Menu fileMenu;
+    // menubar attribute
+    private MenuBar menuBar;
 
     // Step 1: Declare my ImageView attributes
     private ImageView whitePuppyView;
@@ -80,8 +88,8 @@ public class PuppyPane extends GridPane {
         breedField = new TextField();
         colorField = new TextField();
         furtypeField = new TextField();
-        sizeField = new TextField();
-        // weightField = new TextField();
+        // sizeField = new TextField();
+        weightField = new TextField();
         spotsField = new TextField();
         sexField = new TextField();
 
@@ -91,10 +99,15 @@ public class PuppyPane extends GridPane {
         breedLabel = new Label("Breed: " + puppy.getBreed());
         colorLabel = new Label("Color: " + puppy.getColor());
         furtypeLabel = new Label("Fur Type: " + puppy.getFurtype());
-        sizeLabel = new Label("Size: " + puppy.getSize());
-        // weightLabel = new Label("Weight: " + puppy.getWeight());
+        // sizeLabel = new Label("Size: " + puppy.getSize());
+        weightLabel = new Label("Weight: " + String.format("%.2f", puppy.getWeight()));
         spotsLabel = new Label("Spots: " + puppy.isSpots());
         sexLabel = new Label("Sex: " + puppy.getSex());
+
+        // instantiate the file menu
+        fileMenu = new Menu("Change Color");
+        // instantiate the menubar
+        menuBar = new MenuBar();
 
         // add the labels and textfields to the gridpane
         // add the name label and field to the gridpane
@@ -113,11 +126,11 @@ public class PuppyPane extends GridPane {
         this.add(furtypeLabel, 0, 4);
         this.add(furtypeField, 1, 4);
         // add the size label and field to the gridpane
-        this.add(sizeLabel, 0, 5);
-        this.add(sizeField, 1, 5);
+        // this.add(sizeLabel, 0, 5);
+        // this.add(sizeField, 1, 5);
         // add the weight label and field to the gridpane
-        // this.add(weightLabel, 0, 6);
-        // this.add(weightField, 1, 6);
+        this.add(weightLabel, 0, 6);
+        this.add(weightField, 1, 6);
         // add the spots label and field to the gridpane
         this.add(spotsLabel, 0, 7);
         this.add(spotsField, 1, 7);
@@ -128,17 +141,6 @@ public class PuppyPane extends GridPane {
         this.add(puppyButton, 0, 9);
         // add the new puppy button to the gridpane
         this.add(newPuppyButton, 1, 9);
-
-        // add the white puppy view to the gridpane if the puppy color is white or
-        // White, and remove it if not
-        // and store this in a method so that it can be used in the event listener
-        // public static void addWhitePuppyView(puppy); {
-        // if (puppy.getColor().equals("white") || puppy.getColor().equals("White")) {
-        // this.add(whitePuppyView, 2, 0, 1, 10);
-        // } else {
-        // this.getChildren().remove(whitePuppyView);
-        // }
-        // }
 
         changePuppyPicture(puppy);
 
@@ -159,12 +161,149 @@ public class PuppyPane extends GridPane {
         // preserve the aspect ratio
         redPuppyView.setPreserveRatio(true);
 
+        // add a dropdown menu to the gridpane to change the color of the background
+        // create a new menu
+        Menu menu = new Menu("Background Color");
+        // create a new menu item
+        MenuItem pink = new MenuItem("Pink");
+        // set the action of the menu item
+        pink.setOnAction(e -> {
+            // set the background color to pink
+            this.setStyle("-fx-background-color: pink");
+        });
+        // create a new menu item
+        MenuItem blue = new MenuItem("Blue");
+        // set the action of the menu item
+        blue.setOnAction(e -> {
+            // set the background color to blue
+            this.setStyle("-fx-background-color: blue");
+        });
+        // create a new menu item
+        MenuItem yellow = new MenuItem("Yellow");
+        // set the action of the menu item
+        yellow.setOnAction(e -> {
+            // set the background color to yellow
+            this.setStyle("-fx-background-color: yellow");
+        });
+        // create a new menu item
+        MenuItem green = new MenuItem("Green");
+        // set the action of the menu item
+        green.setOnAction(e -> {
+            // set the background color to green
+            this.setStyle("-fx-background-color: green");
+        });
+        // create a new menu item
+        MenuItem orange = new MenuItem("Orange");
+        // set the action of the menu item
+        orange.setOnAction(e -> {
+            // set the background color to orange
+            this.setStyle("-fx-background-color: orange");
+        });
+        // create a new menu item
+        MenuItem purple = new MenuItem("Purple");
+        // set the action of the menu item
+        purple.setOnAction(e -> {
+            // set the background color to purple
+            this.setStyle("-fx-background-color: purple");
+        });
+        // create a new menu item
+        MenuItem red = new MenuItem("Red");
+        // set the action of the menu item
+        red.setOnAction(e -> {
+            // set the background color to red
+            this.setStyle("-fx-background-color: red");
+        });
+        // create a new menu item
+        MenuItem white = new MenuItem("White");
+        // set the action of the menu item
+        white.setOnAction(e -> {
+            // set the background color to white
+            this.setStyle("-fx-background-color: white");
+        });
+        // create a new menu item
+        MenuItem black = new MenuItem("Black");
+        // set the action of the menu item
+        black.setOnAction(e -> {
+            // set the background color to black
+            this.setStyle("-fx-background-color: black");
+        });
+        // create a new menu item
+        MenuItem brown = new MenuItem("Brown");
+        // set the action of the menu item
+        brown.setOnAction(e -> {
+            // set the background color to brown
+            this.setStyle("-fx-background-color: brown");
+        });
+        // add the menu items to the menu
+        menu.getItems().addAll(pink, blue, yellow, green, orange, purple, red, white, black, brown);
+        // add the menu to the file menu
+        fileMenu.getItems().add(menu);
+        // add the file menu to the menu bar
+        menuBar.getMenus().add(fileMenu);
+        // add the menu bar to the gridpane
+        this.add(menuBar, 0, 10, 2, 1);
+
+        // add a dropdown menu to the gridpane to change the font color of the labels
+        // create a new menu
+        Menu menu2 = new Menu("Font Color");
+        // create a new menu item
+        MenuItem white2 = new MenuItem("White");
+        // set the action of the menu item
+        white2.setOnAction(e -> {
+            // set the font color to white
+            nameLabel.setTextFill(Color.WHITE);
+            ageLabel.setTextFill(Color.WHITE);
+            breedLabel.setTextFill(Color.WHITE);
+            colorLabel.setTextFill(Color.WHITE);
+            furtypeLabel.setTextFill(Color.WHITE);
+            weightLabel.setTextFill(Color.WHITE);
+            spotsLabel.setTextFill(Color.WHITE);
+            sexLabel.setTextFill(Color.WHITE);
+        });
+        // create a new menu item
+        MenuItem black2 = new MenuItem("Black");
+        // set the action of the menu item
+        black2.setOnAction(e -> {
+            // set the font color to black
+            nameLabel.setTextFill(Color.BLACK);
+            ageLabel.setTextFill(Color.BLACK);
+            breedLabel.setTextFill(Color.BLACK);
+            colorLabel.setTextFill(Color.BLACK);
+            furtypeLabel.setTextFill(Color.BLACK);
+            weightLabel.setTextFill(Color.BLACK);
+            spotsLabel.setTextFill(Color.BLACK);
+            sexLabel.setTextFill(Color.BLACK);
+        });
+        // create a new menu item
+        MenuItem brown2 = new MenuItem("Brown");
+        // set the action of the menu item
+        brown2.setOnAction(e -> {
+            // set the font color to brown
+            nameLabel.setTextFill(Color.BROWN);
+            ageLabel.setTextFill(Color.BROWN);
+            breedLabel.setTextFill(Color.BROWN);
+            colorLabel.setTextFill(Color.BROWN);
+            furtypeLabel.setTextFill(Color.BROWN);
+            weightLabel.setTextFill(Color.BROWN);
+            spotsLabel.setTextFill(Color.BROWN);
+            sexLabel.setTextFill(Color.BROWN);
+        });
+        // add the menu items to the menu
+        menu2.getItems().addAll(white2, black2, brown2);
+        // add the menu to the file menu
+        fileMenu.getItems().add(menu2);
+
+
+        
+
+        // Steps 4 and 5: Write an event listener and connect it to the component that triggers the event
         // add a listener to the puppy button to change the labels
         puppyButton.setOnAction(e -> {
             // store the input from the text fields in a new puppy object
-        Puppy textPuppy = new Puppy(nameField.getText(), Integer.parseInt(ageField.getText()), breedField.getText(),
-        colorField.getText(), furtypeField.getText(), sizeField.getText(), 0, Boolean.parseBoolean(spotsField.getText()),
-        sexField.getText());
+            Puppy textPuppy = new Puppy(nameField.getText(), Integer.parseInt(ageField.getText()),
+                    breedField.getText(), colorField.getText(), furtypeField.getText(), null,
+                    Double.parseDouble(weightField.getText()), Boolean.parseBoolean(spotsField.getText()),
+                    sexField.getText());
             // set the puppy name label to the name field text
             nameLabel.setText("Name: " + nameField.getText());
             // set the puppy age label to the age field text
@@ -175,18 +314,18 @@ public class PuppyPane extends GridPane {
             colorLabel.setText("Color: " + colorField.getText());
             // set the puppy furtype label to the furtype field text
             furtypeLabel.setText("Fur Type: " + furtypeField.getText());
-            // set the puppy size label to the size field text
-            sizeLabel.setText("Size: " + sizeField.getText());
-            // set the puppy weight label to the weight field text
-            // weightLabel.setText("Weight: " + weightField.getText());
+            // set the puppy weight label to the weight field text and format it to 2
+            // decimal places
+            weightLabel.setText("Weight: " + String.format("%.2f", Double.parseDouble(weightField.getText())));
             // set the puppy spots label to the spots field text
             spotsLabel.setText("Spots: " + spotsField.getText());
             // set the puppy sex label to the sex field text
             sexLabel.setText("Sex: " + sexField.getText());
-            // call the change puppy picture method to change the puppy picture based on the text input
+            // call the change puppy picture method to change the puppy picture based on the
+            // text input
             changePuppyPicture(textPuppy);
-            // print the puppy object to the console
-            System.out.println(textPuppy);
+            // print the puppy object to the console (for testing and debugging purposes)
+            // System.out.println(textPuppy);
         });
 
         // add a listener to the new puppy button to change the labels to generate a new
@@ -204,10 +343,8 @@ public class PuppyPane extends GridPane {
             colorLabel.setText("Color: " + newPuppy.getColor());
             // set the puppy furtype label to the new puppy furtype
             furtypeLabel.setText("Fur Type: " + newPuppy.getFurtype());
-            // set the puppy size label to the new puppy size
-            sizeLabel.setText("Size: " + newPuppy.getSize());
-            // set the puppy weight label to the new puppy weight
-            // weightLabel.setText("Weight: " + newPuppy.getWeight());
+            // set the puppy weight label to the new puppy weight and format it to 2 decimal
+            weightLabel.setText("Weight: " + String.format("%.2f", newPuppy.getWeight()));
             // set the puppy spots label to the new puppy spots
             spotsLabel.setText("Spots: " + newPuppy.isSpots());
             // set the puppy sex label to the new puppy sex
@@ -215,45 +352,35 @@ public class PuppyPane extends GridPane {
             // call the changePuppyPicture method to change the puppy picture
             changePuppyPicture(newPuppy);
         });
+
     }
 
     private void changePuppyPicture(Puppy puppy) {
         // Step 3: Add the ImageView attributes to the gridpane
-        // add the white puppy view to the gridpane if the puppy color is white or
-        // White, if not remove it
-
+        // remove the imagefrom the gridpane
         this.getChildren().remove(whitePuppyView);
         this.getChildren().remove(blackPuppyView);
         this.getChildren().remove(brownPuppyView);
         this.getChildren().remove(redPuppyView);
-        System.out.println(puppy.getColor());
+        // print the puppy color to the terminal (for testing and debugging purposes)
+        // System.out.println(puppy.getColor());
+        // add the white puppy view to the gridpane if the puppy color is white or White
         if (puppy.getColor().equals("white") || puppy.getColor().equals("White")) {
             this.add(whitePuppyView, 2, 0, 1, 10);
-        } // else {
-        //     this.getChildren().remove(whitePuppyView);
-        // }
-        // add the black puppy view to the gridpane if the puppy color is black or
-        // Black, if not remove it
+        }
+        // add the black puppy view to the gridpane if the puppy color is black or Black
         if (puppy.getColor().equals("black") || puppy.getColor().equals("Black")) {
             this.add(blackPuppyView, 2, 0, 1, 10);
-        } // else {
-        //     this.getChildren().remove(blackPuppyView);
-        // }
-        // add the brown puppy view to the gridpane if the puppy color is brown or
-        // Brown, if not remove it
+        }
+        // add the brown puppy view to the gridpane if the puppy color is brown or Brown
         if (puppy.getColor().equals("brown") || puppy.getColor().equals("Brown")) {
             this.add(brownPuppyView, 2, 0, 1, 10);
-        } // else {
-        //     this.getChildren().remove(brownPuppyView);
-        // }
-        // add the red puppy view to the gridpane if the puppy color is red or Red, if
-        // not remove it
+        }
+        // add the red puppy view to the gridpane if the puppy color is red or Red
         if (puppy.getColor().equals("red") || puppy.getColor().equals("Red")) {
             this.add(redPuppyView, 2, 0, 1, 10);
-        } // else {
-        //     this.getChildren().remove(redPuppyView);
-        // }
-        
+        }
+
     }
 
 }
