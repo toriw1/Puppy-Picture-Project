@@ -386,7 +386,7 @@ public class PuppyPane extends GridPane {
             }
         });
 
-        // throw an exception if the user clicks the button without entering any input
+        // // throw an exception if the user clicks the button without entering any input
         puppyButton.setOnAction(e -> {
             if (nameField.getText().isEmpty() || ageField.getText().isEmpty() || breedField.getText().isEmpty()
                     || colorField.getText().isEmpty() || furtypeField.getText().isEmpty()
