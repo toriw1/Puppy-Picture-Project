@@ -2,12 +2,14 @@ package edu.guilford;
 
 import java.io.File;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -293,11 +295,9 @@ public class PuppyPane extends GridPane {
         // add the menu to the file menu
         fileMenu.getItems().add(menu2);
 
-
-        
-
-        // Steps 4 and 5: Write an event listener and connect it to the component that triggers the event
-        // add a listener to the puppy button to change the labels
+        // Steps 4 and 5: Write an event listener and connect it to the component that
+        // triggers the event
+        // add a listener to the puppy button to change the labels to what is entered in the text fields
         puppyButton.setOnAction(e -> {
             // store the input from the text fields in a new puppy object
             Puppy textPuppy = new Puppy(nameField.getText(), Integer.parseInt(ageField.getText()),
@@ -326,6 +326,15 @@ public class PuppyPane extends GridPane {
             changePuppyPicture(textPuppy);
             // print the puppy object to the console (for testing and debugging purposes)
             // System.out.println(textPuppy);
+            // clear the text fields
+            nameField.clear();
+            ageField.clear();
+            breedField.clear();
+            colorField.clear();
+            furtypeField.clear();
+            weightField.clear();
+            spotsField.clear();
+            sexField.clear();
         });
 
         // add a listener to the new puppy button to change the labels to generate a new
@@ -353,6 +362,43 @@ public class PuppyPane extends GridPane {
             changePuppyPicture(newPuppy);
         });
 
+        // throw an exception if the user enters a non-integer value for the age and give them a message to enter an integer
+        ageField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                ageField.setText(newValue.replaceAll("[^\\d]", ""));
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Invalid Age");
+                alert.setContentText("Please enter an integer for the age.");
+                alert.showAndWait();
+            }
+        });
+
+        // throw an exception if the user enters a non-numeric value for the weight and give them a message to enter a number
+        weightField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                weightField.setText(newValue.replaceAll("[^\\d]", ""));
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Invalid Weight");
+                alert.setContentText("Please enter a number for the weight.");
+                alert.showAndWait();
+            }
+        });
+
+        // throw an exception if the user clicks the button without entering any input
+        puppyButton.setOnAction(e -> {
+            if (nameField.getText().isEmpty() || ageField.getText().isEmpty() || breedField.getText().isEmpty()
+                    || colorField.getText().isEmpty() || furtypeField.getText().isEmpty()
+                    || weightField.getText().isEmpty() || spotsField.getText().isEmpty()
+                    || sexField.getText().isEmpty()) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Invalid Input");
+                alert.setContentText("Please enter a value for all fields.");
+                alert.showAndWait();
+            }
+        });
     }
 
     private void changePuppyPicture(Puppy puppy) {
