@@ -299,6 +299,16 @@ public class PuppyPane extends GridPane {
         // triggers the event
         // add a listener to the puppy button to change the labels to what is entered in the text fields
         puppyButton.setOnAction(e -> {
+            if (nameField.getText().isEmpty() || ageField.getText().isEmpty() || breedField.getText().isEmpty()
+                    || colorField.getText().isEmpty() || furtypeField.getText().isEmpty()
+                    || weightField.getText().isEmpty() || spotsField.getText().isEmpty()
+                    || sexField.getText().isEmpty()) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Invalid Input");
+                alert.setContentText("Please enter a value for all fields.");
+                alert.showAndWait();
+            } else {
             // store the input from the text fields in a new puppy object
             Puppy textPuppy = new Puppy(nameField.getText(), Integer.parseInt(ageField.getText()),
                     breedField.getText(), colorField.getText(), furtypeField.getText(), null,
@@ -335,6 +345,7 @@ public class PuppyPane extends GridPane {
             weightField.clear();
             spotsField.clear();
             sexField.clear();
+            }
         });
 
         // add a listener to the new puppy button to change the labels to generate a new
@@ -386,19 +397,6 @@ public class PuppyPane extends GridPane {
             }
         });
 
-        // // throw an exception if the user clicks the button without entering any input
-        puppyButton.setOnAction(e -> {
-            if (nameField.getText().isEmpty() || ageField.getText().isEmpty() || breedField.getText().isEmpty()
-                    || colorField.getText().isEmpty() || furtypeField.getText().isEmpty()
-                    || weightField.getText().isEmpty() || spotsField.getText().isEmpty()
-                    || sexField.getText().isEmpty()) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error Dialog");
-                alert.setHeaderText("Invalid Input");
-                alert.setContentText("Please enter a value for all fields.");
-                alert.showAndWait();
-            }
-        });
     }
 
     private void changePuppyPicture(Puppy puppy) {
