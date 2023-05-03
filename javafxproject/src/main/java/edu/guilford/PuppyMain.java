@@ -28,9 +28,6 @@ public class PuppyMain extends Application {
 
     public static void main(String[] args) {
         launch();
-
-        // write a print statement to print out a message that the program has ended
-        System.out.println("Program has ended");
     }
 
 }

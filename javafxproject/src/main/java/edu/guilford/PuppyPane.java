@@ -385,14 +385,14 @@ public class PuppyPane extends GridPane {
             }
         });
 
-        // throw an exception if the user enters a non-numeric value for the weight and give them a message to enter a number
+        // throw an exception if the user enters anything other than a double for the weight and give them a message to enter a double
         weightField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                weightField.setText(newValue.replaceAll("[^\\d]", ""));
+            if (!newValue.matches("\\d*\\.?\\d*")) {
+                weightField.setText(newValue.replaceAll("[^\\d\\.]", ""));
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Invalid Weight");
-                alert.setContentText("Please enter a number for the weight.");
+                alert.setContentText("Please enter an integer or decimal for the weight.");
                 alert.showAndWait();
             }
         });
